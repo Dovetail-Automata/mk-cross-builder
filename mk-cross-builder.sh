@@ -14,6 +14,7 @@ if test "$1" = "build"; then
 	echo "Please specify tag to build" >&/dev/null
 	exit 1
     fi
+    shift
     cd $(dirname $0)
     git checkout $TAG
     docker build -t ${IMAGE}:${TAG} "$@" .
