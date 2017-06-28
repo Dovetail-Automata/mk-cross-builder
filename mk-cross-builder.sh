@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
-BASE_IMAGE=zultron/docker-cross-builder
-IMAGE=zultron/mk-cross-builder
+IMAGE=dovetailautomata/mk-cross-builder
 BASE_NAME=mk-cross-builder
 
 # Build: If called with args `mk-cross-builder build [...]`, then
