@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-IMAGE=dovetailautomata/mk-cross-builder
+IMAGE=zultron/mk-cross-builder
 BASE_NAME=mk-cross-builder
 
 # Build: If called with args `mk-cross-builder build [...]`, then
