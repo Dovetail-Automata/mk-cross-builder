@@ -9,7 +9,7 @@
 # Tag branch settings
 
 BASE_BRANCH="master"
-TAGS="amd64 armhf i386 raspbian"
+TAGS="amd64 armhf i386 raspbian amd64_9 armhf_9 i386_9 raspbian_9"
 ATTRS="DEBIAN_ARCH SYS_ROOT HOST_MULTIARCH DISTRO EXTRA_FLAGS"
 
 declare -A SETTINGS_amd64=(
@@ -34,6 +34,35 @@ declare -A SETTINGS_i386=(
     [EXTRA_FLAGS]="-m32"
 )
 declare -A SETTINGS_raspbian=(
+    [DEBIAN_ARCH]="armhf"
+    [SYS_ROOT]="/sysroot/rpi"
+    [HOST_MULTIARCH]="arm-linux-gnueabihf"
+    [DISTRO]="raspbian"
+    [EXTRA_FLAGS]=
+)
+
+declare -A SETTINGS_amd64_9=(
+    [DEBIAN_ARCH]="amd64"
+    [SYS_ROOT]=
+    [HOST_MULTIARCH]="x86_64-linux-gnu"
+    [DISTRO]="stretch"
+    [EXTRA_FLAGS]=
+)
+declare -A SETTINGS_armhf_9=(
+    [DEBIAN_ARCH]="armhf"
+    [SYS_ROOT]="/sysroot/armhf"
+    [HOST_MULTIARCH]="arm-linux-gnueabihf"
+    [DISTRO]="stretch"
+    [EXTRA_FLAGS]=
+)
+declare -A SETTINGS_i386_9=(
+    [DEBIAN_ARCH]="i386"
+    [SYS_ROOT]="/sysroot/i386"
+    [HOST_MULTIARCH]="i386-linux-gnu"
+    [DISTRO]="stretch"
+    [EXTRA_FLAGS]="-m32"
+)
+declare -A SETTINGS_raspbian_9=(
     [DEBIAN_ARCH]="armhf"
     [SYS_ROOT]="/sysroot/rpi"
     [HOST_MULTIARCH]="arm-linux-gnueabihf"
