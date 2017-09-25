@@ -15,8 +15,10 @@ if test "$1" = "build"; then
     fi
     shift
     cd $(dirname $0)
+    OLD_TAG="$(git branch | awk '/\*/ { print $2 }')"
     git checkout $TAG
     docker build -t ${IMAGE}:${TAG} "$@" .
+    git checkout "${OLD_TAG}"
     exit
 fi
 
