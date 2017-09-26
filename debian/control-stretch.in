@@ -9,9 +9,8 @@ Build-Depends: debhelper (>= 6),
     libxmu-headers, python (>= 2.6.6-3~), python-dev (>= 2.6.6-3~),
     cython (>= 0.19), dh-python,
     pkg-config, psmisc, python-tk, libxaw7-dev, libboost-serialization-dev,
-    libzmq3-dev (>= 4.0.4), libczmq-dev (>= 2.2.0), libjansson-dev (>= 2.5),
-    libwebsockets-dev (>= 1.2.2),
-    python-zmq (>= 14.0.1), procps,
+    zeromq, czmq, libjansson-dev (>= 2.5),
+    libwebsockets-dev (>= 1.2.2), procps,
     liburiparser-dev, libssl-dev, python-setuptools,
     uuid-dev, uuid-runtime, libavahi-client-dev,
     libprotobuf-dev (>= 2.4.1), protobuf-compiler (>= 2.4.1),
@@ -50,11 +49,11 @@ Depends: ${shlibs:Depends}, machinekit-rt-threads, @TCL_TK_DEPS@,
     python-gnome2, python-glade2,
     python-numpy, python-gtksourceview2,
     python-vte, python-xlib, python-gtkglext1, python-configobj,
-    python-zmq, python-protobuf (>= 2.4.1), python-gst0.10,
+    python-protobuf (>= 2.4.1), python-gst-1.0,
     python-avahi, python-simplejson, python-pyftpdlib,
-    python-pydot, xdot,
+    python-pydot, xdot, zeromq, czmq,
     tclreadline, bc, procps, psmisc,
-    gstreamer0.10-plugins-base
+    gstreamer1.0-plugins-base
 Description: PC based motion controller for real-time Linux
  Machinekit is the next-generation Enhanced Machine Controller which
  provides motion control for CNC machine tools and robotic
