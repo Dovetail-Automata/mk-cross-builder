@@ -3,6 +3,9 @@
 IMAGE=zultron/mk-cross-builder
 BASE_NAME=mk-cross-builder
 
+TOPDIR="$(dirname $0)"
+DOCKERFILEDIR="$TOPDIR/dockerfiles"
+
 # Build: If called with args `mk-cross-builder build [...]`, then
 # build the image instead of running it, and add arguments to the
 # `docker build` command
@@ -15,11 +18,10 @@ if test "$1" = "build"; then
     fi
     shift
     cd $(dirname $0)
-    OLD_TAG="$(git branch | awk '/\*/ { print $2 }')"
-    git checkout $TAG
-    docker build -t ${IMAGE}:${TAG} "$@" .
-    git checkout "${OLD_TAG}"
-    exit
+    exec docker build \
+	-t ${IMAGE}:${TAG} \
+	-f "${DOCKERFILEDIR}/Dockerfile.${TAG}" \
+	"$@" .
 fi
 
 TAG="$1"
