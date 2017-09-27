@@ -9,7 +9,7 @@ CONTAINER_REV=$(git -C "${TOPDIR}" rev-parse --short HEAD)
 # Read config variables
 . "$TOPDIR/config.sh"
 
-TAGS="$(compgen -v SETTINGS_ | sed 's/^SETTINGS_//')"
+TAGS="$(echo $(compgen -v SETTINGS_ | sed 's/^SETTINGS_//'))"
 
 usage() {
     ERRMSG="$1"
@@ -20,7 +20,7 @@ usage() {
 	echo "    $0 build TAG             Build Docker container image"
 	echo "    $0 TAG                   Run interactive shell in container"
 	echo "    $0 TAG CMD [ ARGS ... ]  Run CMD in container"
-	echo "TAGs:  $(echo $TAGS)"
+	echo "TAGs:  $TAGS"
     } >&2
     if test -z "$ERRMSG"; then
 	exit
