@@ -50,14 +50,18 @@ template_dockerfile() {
 
 }
 
+set_and_check_tag() {
+    TAG="$1"
+    test -n "$TAG" || usage "Please specify tag"
+    echo " $TAGS " | grep -q " $TAG " || usage "Invalid tag '$TAG'"
+}
+
 if test "$1" = "build"; then
     # Build:  If called with args `mk-cross-builder build [...]`, then
     # build the image instead of running it, and add arguments to the
     # `docker build` command
     shift
-    TAG="$1"
-    test -n "$TAG" || usage "Please specify tag to build"
-    shift
+    set_and_check_tag "$1" && shift
     cd $(dirname $0)
     template_dockerfile $TAG
     set -x
@@ -74,9 +78,7 @@ elif test "$1" = "update"; then
     exit
 fi
 
-TAG="$1"
-test -n "$TAG" || usage "Please specify tag to run"
-shift
+set_and_check_tag "$1" && shift
 
 NAME=${BASE_NAME}-${TAG}
 
