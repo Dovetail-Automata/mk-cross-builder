@@ -4,7 +4,7 @@ IMAGE=${IMAGE:-zultron/mk-cross-builder}
 BASE_NAME=mk-cross-builder
 
 TOPDIR="$(dirname $0)"
-CONTAINER_REV=$(git rev-parse --short HEAD)
+CONTAINER_REV=$(git -C "${TOPDIR}" rev-parse --short HEAD)
 
 # Read config variables
 . "$TOPDIR/config.sh"
