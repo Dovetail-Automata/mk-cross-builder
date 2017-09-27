@@ -64,12 +64,12 @@ declare -A SETTINGS_i386_9=(
     [DISTRO_VER]="9"
     [EXTRA_FLAGS]="-m32"
 )
-declare -A SETTINGS_raspbian_9=(
-    [DEBIAN_ARCH]="armhf"
-    [SYS_ROOT]="/sysroot"
-    [HOST_MULTIARCH]="arm-linux-gnueabihf"
-    [DISTRO_CODENAME]="raspbian"
-    [BASE_IMAGE]="debian:stretch"
-    [DISTRO_VER]="9"
-    [EXTRA_FLAGS]=
-)
+# declare -A SETTINGS_raspbian_9=(
+#     [DEBIAN_ARCH]="armhf"
+#     [SYS_ROOT]="/sysroot"
+#     [HOST_MULTIARCH]="arm-linux-gnueabihf"
+#     [DISTRO_CODENAME]="raspbian"
+#     [BASE_IMAGE]="debian:stretch"
+#     [DISTRO_VER]="9"
+#     [EXTRA_FLAGS]=
+# )
