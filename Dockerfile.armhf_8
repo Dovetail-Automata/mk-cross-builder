@@ -115,11 +115,12 @@ RUN apt-get install -y \
 ###########################################
 # Packagecloud.io
 
-# Add packagecloud cli and prune utility
-RUN gem install package_cloud --no-rdoc --no-ri
-ADD packagecloud/packagecloud-prune.py /usr/bin/packagecloud-prune
-ADD packagecloud/packagecloud-upload.sh /usr/bin/packagecloud-upload
-ADD packagecloud/PackagecloudIo.py /usr/lib/python2.7
+# FIXME this began failing in Stretch
+# # Add packagecloud cli and prune utility
+# RUN gem install package_cloud --no-rdoc --no-ri
+# ADD packagecloud/packagecloud-prune.py /usr/bin/packagecloud-prune
+# ADD packagecloud/packagecloud-upload.sh /usr/bin/packagecloud-upload
+# ADD packagecloud/PackagecloudIo.py /usr/lib/python2.7
 
 ###################################################################
 # Build environment
@@ -310,7 +311,7 @@ ENV PATH=/usr/lib/ccache:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
 RUN echo "${USER}:x:${UID}:${GID}::${HOME}:${SHELL}" >> /etc/passwd
 RUN echo "${USER}:x:${GID}:" >> /etc/group
 # Put this last so the Docker cache isn't dirtied constantly
-ENV CONTAINER_REV=1df3953
+ENV CONTAINER_REV=6d3d90b
 
 # Customize the run environment to your taste
 # - bash prompt
