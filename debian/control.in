@@ -52,7 +52,7 @@ Depends: ${shlibs:Depends}, machinekit-rt-threads, @TCL_TK_DEPS@,
     python-vte, python-xlib, python-gtkglext1, python-configobj,
     python-zmq, python-protobuf (>= 2.4.1), python-gst0.10,
     python-avahi, python-simplejson, python-pyftpdlib,
-    python-pydot, xdot,
+    python-pydot, xdot, libzmq3 (>= 4.0.4), libczmq4 (>= 4.0.2),
     tclreadline, bc, procps, psmisc,
     gstreamer0.10-plugins-base
 Description: PC based motion controller for real-time Linux
