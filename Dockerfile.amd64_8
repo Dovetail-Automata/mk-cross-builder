@@ -11,7 +11,6 @@ ENV HOST_MULTIARCH=x86_64-linux-gnu
 ENV DISTRO_CODENAME=jessie
 ENV DISTRO_VER=8
 ENV EXTRA_FLAGS=
-ENV CONTAINER_REV=bed7b7d
 ENV SYS_ROOT=
 
 ###################################################################
@@ -161,6 +160,10 @@ RUN test -z "$SYS_ROOT" \
         mkdir -p ${SYS_ROOT}/etc \
         && cp /etc/ld.so.conf ${SYS_ROOT}/etc/ld.so.conf; \
     }
+# Help dpkg-shlibdeps find libs
+RUN test -z "$SYS_ROOT" \
+    || echo "/lib/arm-linux-gnueabihf\n/usr/lib/arm-linux-gnueabihf" \
+        > /etc/ld.so.conf.d/${HOST_MULTIARCH}.conf
 # Symlink i586 binutils to i386 so ./configure can find them
 RUN for i in /usr/bin/i586-linux-gnu-*; do \
 	ln -s $(basename $i) $(echo $i | sed 's/i586/i386/'); \
@@ -306,6 +309,8 @@ ENV SHELL=/bin/bash
 ENV PATH=/usr/lib/ccache:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
 RUN echo "${USER}:x:${UID}:${GID}::${HOME}:${SHELL}" >> /etc/passwd
 RUN echo "${USER}:x:${GID}:" >> /etc/group
+# Put this last so the Docker cache isn't dirtied constantly
+ENV CONTAINER_REV=1df3953
 
 # Customize the run environment to your taste
 # - bash prompt
