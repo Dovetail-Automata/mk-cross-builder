@@ -27,16 +27,6 @@ declare -A SETTINGS_i386_8=(
     [DISTRO_VER]="8"
     [EXTRA_FLAGS]="-m32"
 )
-declare -A SETTINGS_raspbian_8=(
-    [DEBIAN_ARCH]="armhf"
-    [SYS_ROOT]="/sysroot"
-    [HOST_MULTIARCH]="arm-linux-gnueabihf"
-    [DISTRO_CODENAME]="raspbian"
-    [BASE_IMAGE]="debian:jessie"
-    [DISTRO_VER]="8"
-    [EXTRA_FLAGS]=
-)
-
 declare -A SETTINGS_amd64_9=(
     [DEBIAN_ARCH]="amd64"
     [SYS_ROOT]=
@@ -64,12 +54,3 @@ declare -A SETTINGS_i386_9=(
     [DISTRO_VER]="9"
     [EXTRA_FLAGS]="-m32"
 )
-# declare -A SETTINGS_raspbian_9=(
-#     [DEBIAN_ARCH]="armhf"
-#     [SYS_ROOT]="/sysroot"
-#     [HOST_MULTIARCH]="arm-linux-gnueabihf"
-#     [DISTRO_CODENAME]="raspbian"
-#     [BASE_IMAGE]="debian:stretch"
-#     [DISTRO_VER]="9"
-#     [EXTRA_FLAGS]=
-# )
