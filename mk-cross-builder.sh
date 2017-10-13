@@ -32,12 +32,17 @@ usage() {
 template_dockerfile() {
     # Customize Dockerfile for a tag
     TAG=$1
-    declare -a substitutions=()
+    eval BASE_IMAGE="\${SETTINGS_$TAG[BASE_IMAGE]}"
+    declare -a substitutions=( "-e" "s,@BASE_IMAGE@,$BASE_IMAGE," )
     eval KEYS="\${!SETTINGS_${TAG}[@]}"
     # Build array of `sed -e 's/@$KEY@/$VAL/'` replacements
     for KEY in $KEYS; do
 	eval VAL="\${SETTINGS_$TAG[$KEY]}"
-	substitutions+=( "-e" "s,@$KEY@,$VAL," )
+	if test -n "$VAL"; then
+	    substitutions+=( "-e" "s,@ENV_${KEY}@,ENV $KEY=$VAL," )
+	else
+	    substitutions+=( "-e" "s,@ENV_${KEY}@,," )
+	fi
     done
     echo "Updating Dockerfile.$TAG" >&2
     {
