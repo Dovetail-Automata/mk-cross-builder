@@ -8,6 +8,7 @@ declare -A SETTINGS_amd64_8=(
     [BASE_IMAGE]="debian:jessie"
     [DISTRO_VER]="8"
     [EXTRA_FLAGS]=
+    [LDEMULATION]=
 )
 declare -A SETTINGS_armhf_8=(
     [DEBIAN_ARCH]="armhf"
@@ -17,6 +18,7 @@ declare -A SETTINGS_armhf_8=(
     [BASE_IMAGE]="debian:jessie"
     [DISTRO_VER]="8"
     [EXTRA_FLAGS]=
+    [LDEMULATION]=
 )
 declare -A SETTINGS_i386_8=(
     [DEBIAN_ARCH]="i386"
@@ -26,6 +28,7 @@ declare -A SETTINGS_i386_8=(
     [BASE_IMAGE]="debian:jessie"
     [DISTRO_VER]="8"
     [EXTRA_FLAGS]="-m32"
+    [LDEMULATION]="elf_i386"
 )
 declare -A SETTINGS_amd64_9=(
     [DEBIAN_ARCH]="amd64"
@@ -35,6 +38,7 @@ declare -A SETTINGS_amd64_9=(
     [BASE_IMAGE]="debian:stretch"
     [DISTRO_VER]="9"
     [EXTRA_FLAGS]=
+    [LDEMULATION]=
 )
 declare -A SETTINGS_armhf_9=(
     [DEBIAN_ARCH]="armhf"
@@ -44,6 +48,7 @@ declare -A SETTINGS_armhf_9=(
     [BASE_IMAGE]="debian:stretch"
     [DISTRO_VER]="9"
     [EXTRA_FLAGS]=
+    [LDEMULATION]=
 )
 declare -A SETTINGS_i386_9=(
     [DEBIAN_ARCH]="i386"
@@ -53,4 +58,5 @@ declare -A SETTINGS_i386_9=(
     [BASE_IMAGE]="debian:stretch"
     [DISTRO_VER]="9"
     [EXTRA_FLAGS]="-m32"
+    [LDEMULATION]="elf_i386"
 )
