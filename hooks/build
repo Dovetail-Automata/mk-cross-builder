@@ -86,7 +86,8 @@ esac
 ) >&2
 
 # Build the image
-docker build \
+set -x
+exec docker build \
        --build-arg DEBIAN_ARCH=${DEBIAN_ARCH} \
        --build-arg SYS_ROOT=${SYS_ROOT} \
        --build-arg HOST_MULTIARCH=${HOST_MULTIARCH} \
