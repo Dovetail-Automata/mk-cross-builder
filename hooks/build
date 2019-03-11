@@ -59,6 +59,11 @@ case "${CACHE_TAG}" in
         BASE_IMAGE="debian:stretch"
         DISTRO_VER="9"
         ;;
+    *_10)
+        DISTRO_CODENAME="buster"
+        BASE_IMAGE="debian:buster"
+        DISTRO_VER="10"
+        ;;
     *)
         echo "Unknown tag '${CACHE_TAG}'" >&2
         exit 1
