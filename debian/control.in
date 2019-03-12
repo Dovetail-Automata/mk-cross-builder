@@ -20,6 +20,7 @@ Build-Depends: debhelper (>= 6),
     python-pyftpdlib, tcl8.6-dev, tk8.6-dev, tcl-dev, libcgroup-dev,
     python-gst-1.0 | python-gst-0.10,
     python-imaging | python-pil,
+    yapps2-runtime | python-yapps, yapps2,
     python-imaging-tk | python-pil.imagegtk   @BUILD_DEPS@
 Standards-Version: 2.1.0
 
