@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 6),
     autoconf (>= 2.63), automake, libboost-python-dev, libgl1-mesa-dev,
     libglu1-mesa-dev, libgtk2.0-dev, libmodbus-dev (>= 3.0), libudev-dev,
     libncurses-dev, libreadline-dev, libusb-1.0-0-dev, libxmu-dev,
-    libxmu-headers, python (>= 2.6.6), python-dev (>= 2.6.6),
+    libxmu-headers, python (>= 2.6.6), python-dev (>= 2.6.6), libck-dev,
     cython (>= 0.19), dh-python,
     pkg-config, psmisc, python-tk, libxaw7-dev, libboost-serialization-dev,
     libzmq3-dev (>= 4.0.4), libczmq-dev (>= 4.0.2), libjansson-dev (>= 2.5),
@@ -17,11 +17,9 @@ Build-Depends: debhelper (>= 6),
     libprotobuf-dev (>= 2.4.1), protobuf-compiler (>= 2.4.1),
     python-protobuf (>= 2.4.1), libprotoc-dev (>= 2.4.1),
     python-simplejson, libtk-img, libboost-thread-dev,
-    python-pyftpdlib, tcl8.6-dev, tk8.6-dev, tcl-dev, libcgroup-dev,
-    python-gst-1.0 | python-gst-0.10,
-    python-imaging | python-pil,
     yapps2-runtime | python-yapps, yapps2,
-    python-imaging-tk | python-pil.imagegtk   @BUILD_DEPS@
+    python-pyftpdlib, tcl8.6-dev, tk8.6-dev, tcl-dev,
+    libcgroup-dev @BUILD_DEPS@
 Standards-Version: 2.1.0
 
 Package: machinekit
@@ -39,7 +37,10 @@ Depends: ${shlibs:Depends}, machinekit-rt-threads, tcl8.6, tk8.6,
     python-avahi, python-simplejson, python-pyftpdlib,
     python-pydot, xdot,
     tclreadline, bc, procps, psmisc, cgroup-tools,
-    uuid-runtime @DEPS@
+    python-gst-1.0 | python-gst0.10,
+    python-imaging | python-pil,
+    python-imaging-tk | python-pil.imagegtk,
+    uuid-runtime, libck0 @DEPS@
 Description: PC based motion controller for real-time Linux
  Machinekit is the next-generation Enhanced Machine Controller which
  provides motion control for CNC machine tools and robotic
@@ -49,8 +50,7 @@ Package: machinekit-dev
 Architecture: any
 Depends: make, g++, tcl8.6, tk8.6,
    ${shlibs:Depends}, ${misc:Depends},
-   machinekit (= ${binary:Version}),
-   yapps2-runtime
+   machinekit (= ${binary:Version})
 Section: libs
 Description: PC based motion controller for real-time Linux
  Machinekit is the next-generation Enhanced Machine Controller which
