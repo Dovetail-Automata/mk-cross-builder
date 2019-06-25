@@ -73,7 +73,6 @@ usage() {
     test -z "$1" || echo "$1"
     echo "Usage:  $0 [ arg ... ]"
     echo "   arg:    function:"
-    echo "   -x      build Xenomai threads"
     echo "   -c      rewrite changelog to set package version from git commit"
     echo "   -s      create source tarball for non binary package builds"
     } >&2
@@ -98,37 +97,50 @@ HAVE_FLAVOR=false
 ## copy base templates into place
 
 ## situation at 20092018
+##
 ## python-gst1.0 backported to Jessie + Stretch
-## python-gtksourceview2 not available for Buster but is for Sid, meaning gladevcp widgets keep working.
-## python-pil and python-pil.imagegtk active for Sid replacing python-imaging and python-imaging-tk
-## however selecting python-imaging and python-imaging-tk in Stretch actually
-## results in python-pil and python-pil.imagegtk being installed, so will probably completely backport soon.
+##
+## python-gtksourceview2 not available for Buster but is for Sid,
+## meaning gladevcp widgets keep working.
+##
+## python-pil and python-pil.imagegtk active for Sid replacing
+## python-imaging and python-imaging-tk; however selecting
+## python-imaging and python-imaging-tk in Stretch actually results in
+## python-pil and python-pil.imagegtk being installed, so will
+## probably completely backport soon.
+##
+## 2019-06-21:
+## libck-dev too old in Jessie (and missing in i386 ?!?); missing in
+## Buster, but @ArcEye built packages for the MK repo
 
 case "$DISTRO_CODENAME" in
     buster)
-        : # Nothing
+        BUILD_DEPS+=", libck-dev"
         ;;
-    stretch|jessie|sid)
-        BUILD_DEPS+=", python-gtksourceview2"
+    jessie)
+        DEPS+=", python-gtksourceview2"
         ;;
     *)
-        BUILD_DEPS+=", python-gtksourceview2"
+        DEPS+=", python-gtksourceview2"
+        BUILD_DEPS+=", libck-dev"
         ;;
 esac
 
 # Configure Xenomai threads
 configure_xenomai() {
+    if ! dpkg-query -W | grep -q libxenomai-dev; then
+        echo "Not configuring build for Xenomai (no libxenomai-dev package)" >&2
+        return
+    fi
+
     echo "debian/control:  Adding xenomai threads configuration" >&2
-    # Be sure the -dev files only appear once
     BUILD_DEPS+=", libxenomai-dev"
     DEPS+=", xenomai-runtime"
-    echo "THREADS_XENOMAI = --with-xenomai" > rules.include
 }
 
 # read command line options
-while getopts xcsh ARG; do
+while getopts csh ARG; do
     case $ARG in
-    x) configure_xenomai ;;
     c) do_changelog ;;  # set new changelog with package versions from git
     s) do_source_tarball ;; # create tarball for non binary builds
     h) usage ;;
@@ -137,6 +149,7 @@ while getopts xcsh ARG; do
 done
 
 # Set control Build-Depends:
+configure_xenomai
 cp control.in control
 sed >control <control.in \
     -e "s/@BUILD_DEPS@/${BUILD_DEPS}/" \
