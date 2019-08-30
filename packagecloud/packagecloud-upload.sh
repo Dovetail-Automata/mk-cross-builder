@@ -10,7 +10,7 @@
 #
 # The following environment variables should be set in .travis.yml:
 # - CMD:  (Also may be first arg to script) Exit if not 'deb'
-# - TAG:  One of amd64/i386/armhf
+# - TAG:  One of amd64/i386/armhf/arm64
 #
 # The following environment variables should be set by Travis CI:
 # - TRAVIS_TEST_RESULT:  Exit if not '0'
@@ -44,7 +44,7 @@ test -n "$TAG" || error "TAG not set"
 # Set up
 
 case $TAG in
-    amd64|i386|armhf) DISTRO=jessie ;;
+    amd64|i386|armhf|arm64) DISTRO=jessie ;;
     *) error "Unknown tag '$TAG'" ;;
 esac
 

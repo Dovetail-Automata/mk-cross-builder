@@ -37,6 +37,13 @@ case "${CACHE_TAG}" in
         EXTRA_FLAGS=
         LDEMULATION=armelf_linux_eabi
         ;;
+    arm64_*)
+        DEBIAN_ARCH="arm64"
+        SYS_ROOT="/sysroot"
+        HOST_MULTIARCH="aarch64-linux-gnu"
+        EXTRA_FLAGS=
+        LDEMULATION=aarch64linux
+        ;;
     i386_*)
         DEBIAN_ARCH="i386"
         SYS_ROOT="/sysroot"
