@@ -19,8 +19,8 @@ env:
   - TAG=armhf_8
 matrix:
   allow_failures:
-    # Until MK repo has libck-dev:arm64 packages
-    - env: TAG=arm64_10
+    # e.g.
+    # - env: TAG=arm64_10
 
 before_script:
   # Show environment for debugging purposes
