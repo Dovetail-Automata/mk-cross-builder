@@ -1,0 +1,34 @@
+sudo: required
+services:
+  - docker
+language: minimal
+env:
+  # - Buster
+  - TAG=amd64_10
+  - TAG=i386_10
+  - TAG=armhf_10
+  - TAG=arm64_10
+  # - Stretch
+  - TAG=amd64_9
+  - TAG=i386_9
+  - TAG=armhf_9
+  - TAG=arm64_9
+  # - Jessie
+  - TAG=amd64_8
+  - TAG=i386_8
+  - TAG=armhf_8
+matrix:
+  allow_failures:
+    # e.g.
+    # - env: TAG=arm64_10
+
+before_script:
+  # Show environment for debugging purposes
+  - env
+script:
+  # Run same script that Docker Hub would run
+  - env IMAGE_NAME=${REPO:-dovetailautomata/mk-cross-builder}:${TAG} hooks/build
+
+after_script:
+  # Show what we did
+  - docker images
