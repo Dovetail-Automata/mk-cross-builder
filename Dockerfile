@@ -287,11 +287,11 @@ RUN if test -z "$SYS_ROOT"; then \
         apt-get update \
         && if test $DISTRO_VER -le 9; then \
 	    apt-get install -y  -o Apt::Get::AllowUnauthenticated=true \
-		machinekit-build-deps \
+		machinekit-hal-build-deps \
 	    && sed -i /etc/apt/sources.list.d/local.list -e '/^deb/ s/^/#/' \
 	    && apt-get update ; \
         else \
-	    apt-get install -y /tmp/debs/machinekit-build-deps_*.deb; \
+	    apt-get install -y /tmp/debs/machinekit-hal-build-deps_*.deb; \
 	fi \
 	&& apt-get clean; \
     fi

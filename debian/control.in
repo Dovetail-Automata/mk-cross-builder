@@ -1,11 +1,12 @@
-Source: machinekit
+Source: machinekit-hal
 Section: misc
 Priority: extra
-Maintainer: John Morris <john@dovetail-automata.com>
+Maintainer: ArcEye <arceyeATmgwareDOTcoDOTuk>
 Build-Depends: debhelper (>= 6),
     autoconf (>= 2.63), automake, libboost-python-dev, libgl1-mesa-dev,
-    libglu1-mesa-dev, libgtk2.0-dev, libmodbus-dev (>= 3.0), libudev-dev,
-    libncurses-dev, libreadline-dev, libusb-1.0-0-dev, libxmu-dev,
+    libglu1-mesa-dev, libmodbus-dev (>= 3.0),
+    libgtk2.0-dev, libudev-dev,
+    libncurses-dev, libreadline-gplv2-dev, libusb-1.0-0-dev, libxmu-dev,
     libxmu-headers, python (>= 2.6.6), python-dev (>= 2.6.6),
     cython (>= 0.19), dh-python,
     pkg-config, psmisc, python-tk, libxaw7-dev, libboost-serialization-dev,
@@ -16,20 +17,17 @@ Build-Depends: debhelper (>= 6),
     uuid-dev, uuid-runtime, libavahi-client-dev,
     libprotobuf-dev (>= 2.4.1), protobuf-compiler (>= 2.4.1),
     python-protobuf (>= 2.4.1), libprotoc-dev (>= 2.4.1),
-    python-simplejson, libtk-img, libboost-thread-dev,
+    python-simplejson, libboost-thread-dev, libcgroup-dev,
     yapps2-runtime | python-yapps, yapps2,
-    python-pyftpdlib, tcl8.6-dev, tk8.6-dev, tcl-dev,
-    libcgroup-dev,
-    linux-headers-arm64 [arm64],
-    @BUILD_DEPS@
+    python-pyftpdlib @BUILD_DEPS@
 Standards-Version: 2.1.0
 
-Package: machinekit
-Breaks: linuxcnc
-Replaces: linuxcnc
+Package: machinekit-hal
+Conflicts: machinekit
 Architecture: any
-Depends: ${shlibs:Depends}, machinekit-rt-threads, tcl8.6, tk8.6,
-    bwidget (>= 1.7), libtk-img (>=1.13),
+Depends: ${shlibs:Depends},
+    tcl8.6, tk8.6,
+    libtk-img (>=1.13),
     ${python:Depends}, ${misc:Depends},
     python-tk, python-imaging, python-imaging-tk,
     python-gnome2, python-glade2,
@@ -43,16 +41,18 @@ Depends: ${shlibs:Depends}, machinekit-rt-threads, tcl8.6, tk8.6,
     python-imaging | python-pil,
     python-imaging-tk | python-pil.imagegtk,
     uuid-runtime @DEPS@
-Description: PC based motion controller for real-time Linux
- Machinekit is the next-generation Enhanced Machine Controller which
- provides motion control for CNC machine tools and robotic
- applications (milling, cutting, routing, etc.).
+Description: Machinekit HAL stack
+    .
+    Machinekit is the next-generation Machine Controller.  It provides
+    motion and other control for atomation, robot and CNC machine tool
+    applications.
 
-Package: machinekit-dev
+Package: machinekit-hal-dev
 Architecture: any
-Depends: make, g++, tcl8.6, tk8.6,
-   ${shlibs:Depends}, ${misc:Depends},
-   machinekit (= ${binary:Version})
+Depends: make, g++,
+   ${misc:Depends},
+   machinekit-hal (= ${binary:Version}),
+   yapps2-runtime | python-yapps
 Section: libs
 Description: PC based motion controller for real-time Linux
  Machinekit is the next-generation Enhanced Machine Controller which
@@ -61,3 +61,35 @@ Description: PC based motion controller for real-time Linux
  .
  This package includes files needed to build new realtime components and
  alternate front-ends for machinekit
+
+Package: machinekit-hal-rt-preempt
+Architecture: any
+Suggests: hostmot2-firmware-all [!armhf]
+Depends:
+    machinekit-hal,
+    linux-image-rt-686-pae [i386], linux-image-rt-amd64 [amd64]
+Description: Machinekit HAL RT_PREEMPT
+ .
+ This metapackage provides components and drivers that run on a realtime
+ (PREEMPT RT) system.
+
+
+Package: machinekit-hal-posix
+Architecture: any
+Suggests: hostmot2-firmware-all [!armhf]
+Description: HAL stack split from Machinekit
+ .
+ This package provides components and drivers that run on a non-realtime
+ (Posix) system.
+Depends:
+    machinekit-hal
+
+Package: machinekit-hal-xenomai
+Architecture: any
+Suggests: hostmot2-firmware-all [!armhf]
+Description: HAL stack split from Machinekit
+ .
+ This package provides components and drivers that run on a realtime
+ (XENOMAI 2) system.
+Depends:
+    machinekit-hal, xenomai-runtime
