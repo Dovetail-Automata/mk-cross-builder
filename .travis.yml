@@ -3,6 +3,11 @@ services:
   - docker
 language: minimal
 env:
+  # - Bullseye
+  - TAG=amd64_11
+  - TAG=i386_11
+  - TAG=armhf_11
+  - TAG=arm64_11
   # - Buster
   - TAG=amd64_10
   - TAG=i386_10
